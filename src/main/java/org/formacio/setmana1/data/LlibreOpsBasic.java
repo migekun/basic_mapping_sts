@@ -9,10 +9,6 @@ import org.formacio.setmana1.domini.Llibre;
 import org.formacio.setmana1.domini.Recomanacio;
 import org.springframework.stereotype.Repository;
 
-/**
- * Modifica aquesta classe per tal que sigui un component Spring que realitza les 
- * operacions de persistencia tal com indiquen les firmes dels metodes
- */
 @Repository
 @Transactional
 public class LlibreOpsBasic {
@@ -20,10 +16,6 @@ public class LlibreOpsBasic {
 	@PersistenceContext
 	private EntityManager em;
 	
-
-	/**
-	 * Retorna el llibre amb l'ISBN indicat o, si no existeix, llança un LlibreNoExisteixException
-	 */
 	public Llibre carrega (String isbn) throws LlibreNoExisteixException {
 		Llibre llibre = em.find(Llibre.class, isbn);
 		if (llibre == null) throw new LlibreNoExisteixException();
@@ -31,7 +23,12 @@ public class LlibreOpsBasic {
 	}
 	
 	/**
-	 * Sense sorpreses: dona d'alta un nou llibre amb les propietats especificaques
+	 * 
+	 * @param isbn pk
+	 * @param autor
+	 * @param pagines
+	 * @param recomanacio
+	 * @param titol
 	 */
 	public void alta (String isbn, String autor, Integer pagines, Recomanacio recomanacio, String titol) {
 		Llibre llibre = new Llibre();
@@ -44,7 +41,6 @@ public class LlibreOpsBasic {
 	}
 	
 	/**
-	 * Elimina, si existeix, un llibre de la base de dades
 	 * @param isbn del llibre a eliminar
 	 * @return true si s'ha esborrat el llibre, false si no existia
 	 */
